@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Header from './components/Header.jsx'
-import Display from './components/Display.jsx'
+import ChartWrapper from './components/ChartWrapper.jsx'
 import $ from 'jquery'
 import Background from './images/background.jpg'
 import style from './main.scss';
@@ -12,29 +12,6 @@ class App extends React.Component{
     this.state = {
       example: []
     }
-
-    this.search = this.search.bind(this)
-  }
-
-  //
-  // Class Functions
-  //
-
-  search(param) {
-    $.ajax({
-      method: 'GET',
-      url: `/api/${param}`,
-      success: (data) => {
-        let copyState = this.state;
-        copyState.cities.push(data);
-        copyState.display = data.name;
-        copyState.showView = true;
-        this.setState(copyState)
-      },
-      error: (err) => {
-        console.log('error on Client', err);
-      }
-    })
   }
 
   //
@@ -51,9 +28,7 @@ class App extends React.Component{
           <Header 
             example={this.state.example}
             />
-          <Display 
-            search={this.search}
-          />
+          <ChartWrapper />
         </div>        
       </div>
     )
